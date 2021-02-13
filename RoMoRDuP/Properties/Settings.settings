@@ -1,0 +1,117 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RoMoRDuP.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Version" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0.57</Value>
+    </Setting>
+    <Setting Name="MirrorSourceFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">default</Value>
+    </Setting>
+    <Setting Name="MirrorTargetFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">default</Value>
+    </Setting>
+    <Setting Name="MirrorProcessMax" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="MirrorProcessMaxType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MirrorFileFilterbIncludeOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MirrorFileFilterInclude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">everything</Value>
+    </Setting>
+    <Setting Name="MirrorFileFilterExclude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*[RoMoRDuP_Ignore]*</Value>
+    </Setting>
+    <Setting Name="MirrorFileFilterPlaylistbIncludeOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MirrorFileFilterPlaylistInclude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*.m3u, *.wpl, *.kpl</Value>
+    </Setting>
+    <Setting Name="MirrorFileFilterPlaylistExclude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*[RoMoRDuP_Ignore]*</Value>
+    </Setting>
+    <Setting Name="MirrorbUpdatePlaylists" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MirrorbUseSameFolderPathsPlaylists" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MirrorDuplicatesWithDiffFilenames" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RenameSyncDir</Value>
+    </Setting>
+    <Setting Name="MirrorUpdatedFiles" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MostRecentDate</Value>
+    </Setting>
+    <Setting Name="MirrorMoveTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SyncDir</Value>
+    </Setting>
+    <Setting Name="MirrorMoveChangeFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SyncDir</Value>
+    </Setting>
+    <Setting Name="MirrorbCopyMissingSouceTarget" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MirrorbCopyMissingTargetSource" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MirrorbDeleteTarget" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MirrorbDeleteSource" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MirrorModeSelectSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Easy</Value>
+    </Setting>
+    <Setting Name="MirrorModeUserOptions" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Easy</Value>
+    </Setting>
+    <Setting Name="MirrorUserOptionsEasy" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SyncOneWayLeave</Value>
+    </Setting>
+    <Setting Name="RDSourceFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">default</Value>
+    </Setting>
+    <Setting Name="RDProcessMax" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="RDProcessMaxType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RDFileFilterbIncludeOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RDFileFilterInclude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">everything</Value>
+    </Setting>
+    <Setting Name="RDFileFilterExclude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*[RoMoRDuP_Ignore]*, *.lnk, *.jpg, *.jpeg, *.png, *.bmp, *.gif, *.ico"</Value>
+    </Setting>
+    <Setting Name="RDFileFilterPlaylistbIncludeOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RDFileFilterPlaylistInclude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*.m3u, *.wpl, *.kpl</Value>
+    </Setting>
+    <Setting Name="RDFileFilterPlaylistExclude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*[RoMoRDuP_Ignore]*</Value>
+    </Setting>
+    <Setting Name="RDbUpdatePlaylists" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RDbUseSameFolderPathsPlaylists" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RDModeSelectSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Easy</Value>
+    </Setting>
+    <Setting Name="MirrorSyncAttributes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

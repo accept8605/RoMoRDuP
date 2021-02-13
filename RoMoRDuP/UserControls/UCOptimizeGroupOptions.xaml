@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="RoMoRDuP.UserControls.UCOptimizeGroupOptions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="400">
+    
+    <Grid>
+        <StackPanel>
+            <GroupBox Margin="5" Header="Group files with similar/identical terms">
+                <StackPanel>
+                    <CheckBox Margin="3">activate</CheckBox>
+                    <WrapPanel Margin="3" Orientation="Horizontal">
+                        <Label>If at least</Label>
+                        <TextBox Width="30"></TextBox>
+                        <Label>identical/similar terms longer than</Label>
+                        <TextBox Width="30"></TextBox>
+                        <Label>chars</Label>
+                    </WrapPanel>
+                    <StackPanel Margin="3" Orientation="Horizontal">
+                        <Button Width="30" Margin="3">...</Button>
+                        <Label>subFilter</Label>
+                    </StackPanel>
+                    <StackPanel Margin="3" Orientation="Horizontal">
+                        <Label>Required similarity of terms</Label>
+                        <Slider Width="80" Maximum="100" Name="Slider_GroupSimilarTerms"></Slider>
+                        <TextBox Text="{Binding ElementName=Slider_GroupSimilarTerms, Path=Value}"></TextBox>
+                        <Label>%</Label>
+                    </StackPanel>
+                    <GroupBox Margin="5" Header="Different order of terms">
+                        <WrapPanel>
+                            <RadioButton Margin="3">Skip grouping</RadioButton>
+                            <RadioButton Margin="3">Use grouping</RadioButton>
+                        </WrapPanel>
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+            
+            <GroupBox Margin="5" Header="Group actions">
+                <StackPanel>
+                    <GroupBox Margin="5" Header="Unify similar terms">
+                        <StackPanel>
+                            <CheckBox Margin="3">activate</CheckBox>
+                            <WrapPanel Margin="3" Orientation="Horizontal">
+                                <Label>If less than</Label>
+                                <Slider Width="80" Maximum="100" Name="Slider_UnifySimilarTerms"></Slider>
+                                <TextBox Text="{Binding ElementName=Slider_UnifySimilarTerms, Path=Value}"></TextBox>
+                                <Label>%</Label>
+                                <Label>are the same term prompt user to select a term</Label>
+                            </WrapPanel>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Margin="5" Header="Unify different order">
+                        <StackPanel>
+                            <CheckBox Margin="3">activate</CheckBox>
+                            <WrapPanel Margin="3" Orientation="Horizontal">
+                                <Label>If less than</Label>
+                                <Slider Width="80" Maximum="100" Name="Slider_UnifyDifferentOrder"></Slider>
+                                <TextBox Text="{Binding ElementName=Slider_UnifyDifferentOrder, Path=Value}"></TextBox>
+                                <Label>%</Label>
+                                <Label>are the same order prompt user to select a order</Label>
+                            </WrapPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    
+                    <CheckBox Margin="5">Put grouped files in their own subfolder</CheckBox>
+                </StackPanel>
+            </GroupBox>
+            
+            <GroupBox Margin="5" Header="Move files with specific terms">
+                <StackPanel>
+                    <CheckBox Margin="3">activate</CheckBox>
+                    <StackPanel Margin="3" Orientation="Horizontal">
+                        <Button Width="30" Margin="3">...</Button>
+                        <Label>open .csv</Label>
+                    </StackPanel>
+                    <StackPanel Margin="3" Orientation="Horizontal">
+                        <Button Width="30" Margin="3">...</Button>
+                        <Label>subFilter</Label>
+                    </StackPanel>
+                    <StackPanel Margin="3" Orientation="Horizontal">
+                        <Button Width="30" Margin="3">...</Button>
+                        <Label>target folder path</Label>
+                    </StackPanel>
+                    <StackPanel Margin="3" Orientation="Horizontal">
+                        <Label>Required similarity of terms</Label>
+                        <Slider Width="80" Maximum="100" Name="Slider_MoveSpecific"></Slider>
+                        <TextBox Text="{Binding ElementName=Slider_MoveSpecific, Path=Value}"></TextBox>
+                        <Label>%</Label>
+                    </StackPanel>
+                    <CheckBox Margin="3">keep parent folder</CheckBox>
+                    <CheckBox Margin="3">go by folder names, too</CheckBox>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+            
+    </Grid>
+</UserControl>

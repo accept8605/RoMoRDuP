@@ -1,0 +1,633 @@
+﻿<UserControl x:Class="RoMoRDuP.UCMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:ValueConverters="clr-namespace:RoMoRDuP.ValueConverters"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800"
+             x:Name="MainWin"
+        >
+
+    
+
+    <UserControl.Resources>
+        <System:Double x:Key="Margin_Buttons_Top">2</System:Double>
+        <System:Double x:Key="Margin_Buttons_Bottom">2</System:Double>
+        <System:Double x:Key="Margin_Buttons_Left">2</System:Double>
+        <System:Double x:Key="Margin_Buttons_Right">2</System:Double>
+
+        <ValueConverters:PathToNameConverter x:Key="pathToNameConverter" />
+
+    
+        <!-- ///////////////// Button Style //////////////////-->
+
+
+        <Style x:Key="ButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border>
+                            <Rectangle 
+            Margin="2"
+            StrokeThickness="1"
+            Stroke="#60000000"
+            StrokeDashArray="1 2"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Fill Brushes -->
+
+        <LinearGradientBrush x:Key="NormalBorderBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#CCC" Offset="0.0"/>
+                    <GradientStop Color="#444" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="PressedBorderBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#444" Offset="0.0"/>
+                    <GradientStop Color="#888" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
+
+
+        <Style TargetType="Button" x:Key="ButtonBorderStyle" >
+            <Setter Property="Cursor" Value="Hand"/>
+            
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+            <Setter Property="MinHeight" Value="23"/>
+            <Setter Property="MinWidth" Value="75"/>
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="Button">
+
+                        <Border 
+                            Name="Border" CornerRadius="2" BorderThickness="3" BorderBrush="{StaticResource NormalBorderBrush}">
+
+                            <ContentPresenter />
+                            <!-- <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/> -->
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FF4788c8" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PressedBorderBrush}" />
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </UserControl.Resources>
+
+
+    <Grid>
+        <DockPanel>
+            
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <DockPanel Grid.Column="1">
+                    <StackPanel DockPanel.Dock="Top">
+                        <TextBlock>Wherever you see:</TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Margin="5,0,0,0" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="Resources/Icon_Info.png"/>
+                                </Rectangle.Fill>
+                                <Rectangle.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <Label FontWeight="Bold">Here you see extra information</Label>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Rectangle.ToolTip>
+                            </Rectangle>
+                            <Label>=Tooltip - hover over the icon to see extra information</Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Margin="5,0,0,0" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="Resources/Icon_Warning.png"/>
+                                </Rectangle.Fill>
+                                <Rectangle.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <Label FontWeight="Bold">Here you see a extra warning</Label>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Rectangle.ToolTip>
+                            </Rectangle>
+                            <Label>=Tooltip - hover over the icon to see a warning</Label>
+                        </StackPanel>
+                    </StackPanel>
+
+
+
+
+                    <Grid DockPanel.Dock="Bottom" Margin="0,5,0,5"  Width="Auto" Height="Auto">
+                        <!--Main Frame-->
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <!--Profiles-->
+                            <RowDefinition Height="*"/>
+                            <!--Mirror+RemDup-->
+                            <RowDefinition Height="*"/>
+                            <!-- Optimize + Repair-->
+                            <RowDefinition Height="*"/>
+                            <!-- Donate-->
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <!--Profiles-->
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Margin="5" Grid.Column="0" BorderThickness="1" BorderBrush="Gray">
+                                <!--Save-->
+                                <Grid>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Background="LightSkyBlue">
+                                        <Label Padding="1">Save profile</Label>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.Margin>
+                                            <Thickness Top="{StaticResource Margin_Buttons_Top}" Left="{StaticResource Margin_Buttons_Left}" Right="{StaticResource Margin_Buttons_Right}" Bottom="{StaticResource Margin_Buttons_Bottom}"/>
+                                        </Grid.Margin>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Command="Save" Style="{StaticResource ButtonBorderStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                            <Button.Content>
+                                                <Grid Background="White">
+                                                    <Rectangle>
+                                                        <Rectangle.Fill>
+                                                            <ImageBrush ImageSource="Resources/Icon_Save.png" Stretch="Uniform"/>
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+
+                                        <Rectangle Grid.Column="1" Margin="5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                                            <Rectangle.Fill>
+                                                <ImageBrush ImageSource="Resources/Icon_Info.png"/>
+                                            </Rectangle.Fill>
+                                            <Rectangle.ToolTip>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <Label>Save your user options to a file</Label>
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Rectangle.ToolTip>
+                                        </Rectangle>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <Border Margin="5" Grid.Column="1" BorderThickness="1" BorderBrush="Gray">
+                                <!--Current-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Background="LightSkyBlue">
+                                        <Label Padding="1">Last profile</Label>
+                                    </Grid>
+
+                                    <Label Grid.Row="1" Margin="2,0,2,0" Padding="0" VerticalAlignment="Center" Content="{Binding ElementName=MainWin, Path=tasks.userOptions.profiles.CurrentProfilePath, Converter={StaticResource pathToNameConverter}}" Tag="{Binding ElementName=MainWin, Path=tasks.userOptions.profiles.CurrentProfilePath}">
+                                        <Label.ToolTip>
+                                            <ToolTip DataContext="{Binding Path=PlacementTarget, RelativeSource={x:Static RelativeSource.Self}}">
+                                                <TextBlock Margin="0" Text="{Binding Path=Tag}"> <!-- Using a hack here because .Net is being stupid here: Add a Tag to the Label and Bind Value to it, ToolTip is using tag instead orginal Value -->
+                                                </TextBlock>
+                                            </ToolTip>
+                                        </Label.ToolTip>
+                                    </Label>
+                                </Grid>
+
+                            </Border>
+
+                            <Border Margin="5" Grid.Column="2" BorderThickness="1" BorderBrush="Gray">
+                                <!--Load-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Background="LightSkyBlue">
+                                        <Label Padding="1">Load profile</Label>
+                                    </Grid>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.Margin>
+                                            <Thickness Top="{StaticResource Margin_Buttons_Top}" Left="{StaticResource Margin_Buttons_Left}" Right="{StaticResource Margin_Buttons_Right}" Bottom="{StaticResource Margin_Buttons_Bottom}"/>
+                                        </Grid.Margin>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Command="Open" Style="{StaticResource ButtonBorderStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                            <Button.Content>
+                                                <Grid Background="White">
+                                                    <Rectangle>
+                                                        <Rectangle.Fill>
+                                                            <ImageBrush ImageSource="Resources/Icon_Load.png" Stretch="Uniform"/>
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                        <Rectangle Grid.Column="1" Margin="5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                                            <Rectangle.Fill>
+                                                <ImageBrush ImageSource="Resources/Icon_Info.png"/>
+                                            </Rectangle.Fill>
+                                            <Rectangle.ToolTip>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <Label>Restore your user options from a file</Label>
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Rectangle.ToolTip>
+                                        </Rectangle>
+                                    </Grid>
+                                </Grid>
+
+                            </Border>
+
+                        </Grid>
+
+
+
+                        <Grid Grid.Row="1">
+                            <!--Mirror, Remove Duplicates-->
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Margin="5" Grid.Column="0" BorderThickness="1" BorderBrush="Gray">
+                                <!--Mirror-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Background="LightSkyBlue">
+                                        <Label Padding="1">Mirror folders</Label>
+                                    </Grid>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.Margin>
+                                            <Thickness Top="{StaticResource Margin_Buttons_Top}" Left="{StaticResource Margin_Buttons_Left}" Right="{StaticResource Margin_Buttons_Right}" Bottom="{StaticResource Margin_Buttons_Bottom}"/>
+                                        </Grid.Margin>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Click="MirrorFolders_Click" Style="{StaticResource ButtonBorderStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                            <Button.Content>
+                                                <Grid Background="White">
+                                                    <Rectangle>
+                                                        <Rectangle.Fill>
+                                                            <ImageBrush ImageSource="Resources/Icon_Feature_Mirror.png" Stretch="Uniform"/>
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                        <Rectangle Grid.Column="1" Margin="5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                                            <Rectangle.Fill>
+                                                <ImageBrush ImageSource="Resources/Icon_Info.png"/>
+                                            </Rectangle.Fill>
+                                            <Rectangle.ToolTip>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <RichTextBox Background="AliceBlue" Width="400">
+                                                            <FlowDocument>
+                                                                <Paragraph>
+                                                                    This feature mirrors the content of a selected source folder to a selected target folder. Generation of duplicates in the mirroring process are avoided by generating MD5 hash codes for the files in the selected source/target folders and its sub folders. If renamed files are found in the target folder they can be skipped or renamed back to the one of the source file. If a moved file is found in the target folder it can be placed back in the position of the source folder. Files that are in the source folder but not in the target folder can be copied to it. Files that are in the target folder but not in the source folder can be either ignored or deleted or copied to the source folder.
+                                                                </Paragraph>
+                                                                <Paragraph>
+                                                                    The files can also be mirrored from one mounted true crypt container to another to update a backup container.
+                                                                </Paragraph>
+                                                            </FlowDocument>
+                                                        </RichTextBox>
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Rectangle.ToolTip>
+                                        </Rectangle>
+                                    </Grid>
+                                </Grid>
+
+                            </Border>
+
+                            <Border Margin="5" Grid.Column="1" BorderThickness="1" BorderBrush="Gray">
+                                <!--Remove Duplicates-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Background="LightSkyBlue">
+                                        <Label Padding="1">Remove duplicates</Label>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.Margin>
+                                            <Thickness Top="{StaticResource Margin_Buttons_Top}" Left="{StaticResource Margin_Buttons_Left}" Right="{StaticResource Margin_Buttons_Right}" Bottom="{StaticResource Margin_Buttons_Bottom}"/>
+                                        </Grid.Margin>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Click="Remove_Duplicates_Click" Style="{StaticResource ButtonBorderStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                            <Button.Content>
+                                                <Grid Background="White">
+                                                    <Rectangle>
+                                                        <Rectangle.Fill>
+                                                            <ImageBrush ImageSource="Resources/Icon_Feature_Duplicates.png" Stretch="Uniform"/>
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                        <Rectangle Grid.Column="1" Margin="5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                                            <Rectangle.Fill>
+                                                <ImageBrush ImageSource="Resources/Icon_Info.png"/>
+                                            </Rectangle.Fill>
+                                            <Rectangle.ToolTip>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <RichTextBox Background="AliceBlue" Width="400">
+                                                            <FlowDocument>
+                                                                <Paragraph>
+                                                                    This feature identifies/removes duplicates by generating MD5 hash codes for files in a selected folder and its sub folders. In place of a removed duplicate the software can create a relative shortcut to the remaining original.
+                                                                </Paragraph>
+                                                                <Paragraph>
+                                                                    Also there is a function to update the paths in file-content (text-file-types) in files of a specific type defined by a filter.
+                                                                </Paragraph>
+                                                                <Paragraph>
+                                                                    You might know the problem. You have a ton of duplicates in your music folder, but if you delete one, your playlists stop working. With this you can update your playlists to the new path.
+                                                                </Paragraph>
+                                                            </FlowDocument>
+                                                        </RichTextBox>
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Rectangle.ToolTip>
+                                        </Rectangle>
+                                    </Grid>
+                                </Grid>
+
+                            </Border>
+
+                        </Grid>
+
+
+                        <Grid Grid.Row="2">
+                            <!--Optimize, Repair-->
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Margin="5" Grid.Column="0" BorderThickness="1" BorderBrush="Gray">
+                                <!--Optimize-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Background="LightSkyBlue">
+                                        <Label Padding="1">Optimize file names/folder structures</Label>
+                                    </Grid>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.Margin>
+                                            <Thickness Top="{StaticResource Margin_Buttons_Top}" Left="{StaticResource Margin_Buttons_Left}" Right="{StaticResource Margin_Buttons_Right}" Bottom="{StaticResource Margin_Buttons_Bottom}"/>
+                                        </Grid.Margin>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Click="Optimize_Click" Style="{StaticResource ButtonBorderStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                            <Button.Content>
+                                                <Grid Background="White">
+                                                    <Rectangle>
+                                                        <Rectangle.Fill>
+                                                            <ImageBrush ImageSource="Resources/Icon_Feature_Optimize.png" Stretch="Uniform"/>
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                        <Rectangle Grid.Column="1" Margin="5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                                            <Rectangle.Fill>
+                                                <ImageBrush ImageSource="Resources/Icon_Info.png"/>
+                                            </Rectangle.Fill>
+                                            <Rectangle.ToolTip>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <RichTextBox Background="AliceBlue" Width="400">
+                                                            <FlowDocument>
+                                                                <Paragraph>
+                                                                    This feature can rename files in a selected folder and its sub folders to optimize file names. It can also automatically create a own sub folder for files with a similar file name and move those files to it. In general this feature is to make it easier to find individual files by sorting them and giving them more meaningful file names.
+                                                                </Paragraph>
+                                                                <Paragraph>
+                                                                    Lets say you have a folder with music videos. There are the files:
+                                                                </Paragraph>
+                                                                <List>
+                                                                    <ListItem>
+                                                                        <Paragraph>[GroupX] Rammstein - Sonne[720p].avi</Paragraph>
+                                                                    </ListItem>
+                                                                    <ListItem>
+                                                                        <Paragraph>Sonne%20Rammsten%20[480p] (live).mp4</Paragraph>
+                                                                    </ListItem>
+                                                                </List>
+                                                                <Paragraph>
+                                                                    Note that Rammstein is written with a typing error in one of those original names. The software can auto-process the file names to something like:
+                                                                </Paragraph>
+                                                                <List>
+                                                                    <ListItem>
+                                                                        <Paragraph>Rammstein - Sonne [GroupX][720p].avi</Paragraph>
+                                                                    </ListItem>
+                                                                    <ListItem>
+                                                                        <Paragraph>Rammstein - Sonne (live)[480p].mp4</Paragraph>
+                                                                    </ListItem>
+                                                                </List>
+                                                                <Paragraph>Note that Rammstein is written identically in the result.</Paragraph>
+                                                                <Paragraph>
+                                                                    The software can identify similar terms in file names and unify them. If its not obvious which one of the variants of the term should be used, you are prompted to select one. If there are multiple identical or similar terms in file names, the order will be kept. If the terms are in different orders you are prompted to select a order. If the terms have another term in between them it will be kept.
+                                                                </Paragraph>
+                                                                <Paragraph>
+                                                                    A filter can be configured to ignore terms like “and” to identify similar or identical terms.
+Parts in () or [] can be moved to the end of the name.
+Files with similar or identical terms can be moved to their own sub folder.
+The rules for this process can be configured.
+                                                                </Paragraph>
+                                                                <Paragraph>
+                                                                    Also there is a function to update the paths in file-content (text-file-types) in files of a specific type defined by a filter. (To update paths of renamed/moved files in playlists)
+                                                                </Paragraph>
+                                                                <Paragraph>
+                                                                    There is a function to move all files with a specific (similar) term in their name (e.g. “metallica”) in the same sub folder of the top-folder selected by a user. There is a CSV(“;” separated, pay attention to excel options) with a list of specific terms for specific file-types, standard are names of well-known interprets for music files.
+                                                                </Paragraph>
+                                                            </FlowDocument>
+                                                        </RichTextBox>
+
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Rectangle.ToolTip>
+                                        </Rectangle>
+                                    </Grid>
+                                </Grid>
+
+                            </Border>
+
+                            <Border Margin="5" Grid.Column="1" BorderThickness="1" BorderBrush="Gray">
+                                <!--Repair-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Background="LightSkyBlue">
+                                        <Label Padding="1">Repair playlist paths</Label>
+                                    </Grid>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.Margin>
+                                            <Thickness Top="{StaticResource Margin_Buttons_Top}" Left="{StaticResource Margin_Buttons_Left}" Right="{StaticResource Margin_Buttons_Right}" Bottom="{StaticResource Margin_Buttons_Bottom}"/>
+                                        </Grid.Margin>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Click="RepairPlaylistPaths_Click" Style="{StaticResource ButtonBorderStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                            <Button.Content>
+                                                <Grid Background="White">
+                                                    <Rectangle>
+                                                        <Rectangle.Fill>
+                                                            <ImageBrush ImageSource="Resources/Icon_Feature_Repair.png" Stretch="Uniform"/>
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                        <Rectangle Grid.Column="1" Margin="5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                                            <Rectangle.Fill>
+                                                <ImageBrush ImageSource="Resources/Icon_Info.png"/>
+                                            </Rectangle.Fill>
+                                            <Rectangle.ToolTip>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <RichTextBox Background="AliceBlue" Width="400">
+                                                            <FlowDocument>
+                                                                <Paragraph>
+                                                                    If your playlist paths were already broken from not using RoMoRDuP before, you can use this feature to get them working again.
+                                                                </Paragraph>
+                                                                <Paragraph>
+                                                                    This feature searches for all playlists in a selected folder, and checks the paths in it. If the path of a playlist does not lead to a file, it tries to make good suggestions for a new target file path.
+                                                                </Paragraph>
+                                                                <Paragraph>
+                                                                    The software first checks if there are files with the same file name in other folders within the selected top folder. Then it checks folders with terms in it that appear in the file name in more detail. That means if the file in the playlist is named “Ramstein_Sonne.mp3” it checks folders with terms similar to “Ramstein” or “Sonne” in the folders name in more detail(and their sub folders). The software calculates match points for file names in those folders. This is done by comparing similarity of terms with Damerau Levenshtein Distance. The closer the Damerau Levenshtein Distance and the more similar terms there are to the orginal terms, the more points are given. For example if there is a Folder called “Rammstein” with a sub folder “Sonne” an in it there is a file “Rammstein – Sonne.mp3” this file will score a high point ranking though its not a direct match. The files with the most points are suggested to the user in a combobox for each missing file in the playlist. The user can also browse a file. Then the software advances to the next playlist with missing files.
+                                                                </Paragraph>
+                                                                <Paragraph>
+                                                                    Supported playlist file-types: m3u(music),wpl(music),kpl(kmPlayer-videos)
+                                                                </Paragraph>
+                                                            </FlowDocument>
+                                                        </RichTextBox>
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Rectangle.ToolTip>
+                                        </Rectangle>
+                                    </Grid>
+                                </Grid>
+
+                            </Border>
+
+                        </Grid>
+
+
+
+                        <Grid Grid.Row="3">
+                            <!--Donate-->
+
+                            <Border Margin="5" Grid.Column="0" BorderThickness="1" BorderBrush="Gray">
+                                <!--Donate-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Background="LightSkyBlue">
+                                        <Label Padding="1">Motivate me to work more on this project - donate to charity</Label>
+                                    </Grid>
+                                    <Button Grid.Row="1" Click="Donate_Click" Style="{StaticResource ButtonBorderStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                        <Button.Content>
+                                            <Grid Background="White">
+                                                <Rectangle>
+                                                    <Rectangle.Fill>
+                                                        <ImageBrush ImageSource="Resources/Banner_Unicef.png" Stretch="Uniform"/>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Grid>
+                                        </Button.Content>
+                                    </Button>
+                                </Grid>
+
+                            </Border>
+
+                        </Grid>
+
+                    </Grid>
+
+
+
+                </DockPanel>
+            </Grid>
+        </DockPanel>
+
+    </Grid>
+</UserControl>

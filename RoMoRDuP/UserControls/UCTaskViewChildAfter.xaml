@@ -1,0 +1,244 @@
+﻿<UserControl x:Class="RoMoRDuP.UserControls.UCTaskViewChildAfter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+             xmlns:Tasks="clr-namespace:RoMoRDuP.Tasks"
+             xmlns:ValueConverters="clr-namespace:RoMoRDuP.ValueConverters"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="450"
+             x:Name="TaskViewChildAfter"
+             >
+    
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <ValueConverters:ActionToBackgroundConverter x:Key="ActionToBackground" />
+        <ValueConverters:ActionToStringAfterConverter x:Key="ActionToString" />
+        <ValueConverters:ActionToVisibilityConverter x:Key="ActionToVisibility" />
+        <ValueConverters:StringToVisibilityConverter x:Key="StringToVisibility" />
+
+        <ValueConverters:StringListToVisibilityConverter x:Key="StringListToVisibility" />
+
+        <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+            <EventSetter Event="MouseDoubleClick" Handler="OnItemMouseDoubleClick" />
+
+            <EventSetter Event="TreeViewItem.DragOver" Handler="TreeView_After_DragOver"/>
+            <EventSetter Event="TreeViewItem.Drop" Handler="TreeView_After_Drop"/>
+            <EventSetter Event="TreeViewItem.MouseMove" Handler="TreeView_After_MouseMove"/>
+        </Style>
+    </UserControl.Resources>
+
+
+    <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" PreviewMouseWheel="TS_PreviewMouseWheel">
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Margin="3" HorizontalAlignment="Left" Click="Button_UpdateView_Click">Update actions</Button>
+
+            <TreeView Grid.Row="1" Margin="3" Name="TreeView_After" TreeViewItem.Selected="TreeView_After_TreeViewItemSelected" TreeViewItem.Unselected="TreeView_After_TreeViewItemUnSelected" AllowDrop="True" DataContext="{Binding ElementName=TaskViewChildAfter, Path=TreeModel}" ItemsSource="{Binding Items}" ItemContainerStyle="{StaticResource TreeViewItemStyle}">
+
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type Tasks:TaskNodeViewModel}" ItemsSource="{Binding Children}">
+
+                        <Grid Background="{Binding biggestAction, Converter={StaticResource ActionToBackground}}" MouseDown="TreeView_After_MouseDown" MouseUp="TreeView_After_MouseUp">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />   <!-- Folder File 0-->
+                                <ColumnDefinition Width="300" />     <!--  Name 1 -->
+                                <ColumnDefinition Width="70"/>      <!-- Checkbox activated 2-->
+                                <ColumnDefinition Width="100"/>      <!-- Info 3-->
+                                <ColumnDefinition Width="{Binding Path=task7_With}"/>    <!-- Task7-->
+                                <ColumnDefinition Width="{Binding Path=task5_With}" />     <!-- Task5 4-->
+                                <ColumnDefinition Width="{Binding Path=task4_With}"/>      <!-- Task 4 5-->
+                                <ColumnDefinition Width="{Binding Path=task3_With}"/>    <!-- Task 3 6-->
+                                <ColumnDefinition Width="{Binding Path=task2_With}"/>    <!-- Task 2 7-->
+                                <ColumnDefinition Width="180"/>    <!-- Task 1 8-->
+                                <ColumnDefinition Width="{Binding Path=hashcode_With}"/>    <!-- Hash Codes-->
+                                <ColumnDefinition Width="Auto"/>    <!-- Duplicates-->
+                                <ColumnDefinition/>                 <!-- Duplicates-->
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Margin="0,0,3,0" Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                                <Rectangle Visibility="{Binding Path=IsFolder, Converter={StaticResource BoolToVis}}" Width="19" Height="19">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="../Resources/Icon_Folder.png"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <Rectangle Visibility="{Binding Path=IsFile, Converter={StaticResource BoolToVis}}" Width="19" Height="19">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="../Resources/Icon_File.png"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </StackPanel>
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"></TextBox>
+                            <GridSplitter Visibility="Visible" Grid.Column="1" Background="Black" Width="4"/>
+                            <CheckBox Visibility="{Binding Path=biggestAction, Converter={StaticResource ActionToVisibility}}" Grid.Row="0" Grid.Column="2" Margin="5,2,0,0" IsChecked="{Binding bActivated}">activated</CheckBox>
+                            <GridSplitter Visibility="Visible" Grid.Column="2" Background="Black" Width="4"/>
+
+                            <StackPanel Visibility="{Binding Path=Info, Converter={StaticResource StringToVisibility}}" Grid.Row="0" Grid.Column="3" Orientation="Horizontal">
+                                <TextBlock Margin="2" FontWeight="Bold" Text="Info"></TextBlock>
+                                <TextBlock Margin="2">:</TextBlock>
+                                <TextBlock Margin="2" Text="{Binding Info}">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Margin="2" Text="{Binding Info}"></TextBlock>
+                                    </TextBlock.ToolTip>
+                                </TextBlock>
+                            </StackPanel>
+                            <GridSplitter Visibility="Visible" Grid.Column="3" Background="Black" Width="4"/>
+
+
+                            <StackPanel Visibility="{Binding Path=task7, Converter={StaticResource ActionToVisibility}}" Grid.Row="0" Grid.Column="4" Orientation="Horizontal">
+                                <TextBlock Margin="2" FontWeight="Bold" Text="{Binding task7, Converter={StaticResource ActionToString}}"></TextBlock>
+                                <TextBlock Margin="2">:</TextBlock>
+                                
+                                <Rectangle Grid.Column="1" Margin="5,0,0,5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="../Resources/Icon_Info.png"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.ToolTip>
+                                        <ToolTip>
+                                            <Grid>
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="ReadOnly: " />
+                                                        <CheckBox IsChecked="{Binding Path=SetFileAttributes.ReadOnly}"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Hidden: " />
+                                                        <CheckBox IsChecked="{Binding Path=SetFileAttributes.Hidden}"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="CreatedDateTime: " />
+                                                        <TextBlock Text="{Binding Path=SetFileAttributes.strCreatedDateTime}"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Grid>
+                                        </ToolTip>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+
+                                <TextBlock Margin="2" Text="{Binding Path=Path_SetAttributes}">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Margin="2" Text="{Binding Path_SetAttributes}"></TextBlock>
+                                    </TextBlock.ToolTip>
+                                </TextBlock>
+                            </StackPanel>
+                            <GridSplitter Visibility="{Binding Path=task7, Converter={StaticResource ActionToVisibility}}" Grid.Column="4" Background="Black" Width="4"/>
+
+                            
+
+                            <StackPanel Visibility="{Binding Path=task5, Converter={StaticResource ActionToVisibility}}" Grid.Row="0" Grid.Column="5" Orientation="Horizontal">
+                                <TextBlock Margin="2" FontWeight="Bold" Text="{Binding task5, Converter={StaticResource ActionToString}}"></TextBlock>
+                                <TextBlock Margin="2">:</TextBlock>
+                                <TextBlock Margin="2" Text="{Binding Path_5_Delete}">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Margin="2" Text="{Binding Path_5_Delete}"></TextBlock>
+                                    </TextBlock.ToolTip>
+                                </TextBlock>
+                            </StackPanel>
+                            <GridSplitter Visibility="{Binding Path=task5, Converter={StaticResource ActionToVisibility}}" Grid.Column="5" Background="Black" Width="4"/>
+
+
+
+
+
+
+
+                            <StackPanel Visibility="{Binding Path=task4, Converter={StaticResource ActionToVisibility}}" Grid.Row="0" Grid.Column="6" Orientation="Horizontal">
+                                <TextBlock Margin="2" FontWeight="Bold" Text="{Binding task4, Converter={StaticResource ActionToString}}"></TextBlock>
+                                <TextBlock Margin="2">:</TextBlock>
+                                <TextBlock Margin="2" Text="{Binding Path_4_Rename}">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Margin="2" Text="{Binding Path_4_Rename}"></TextBlock>
+                                    </TextBlock.ToolTip>
+                                </TextBlock>
+                            </StackPanel>
+                            <GridSplitter Visibility="{Binding Path=task4, Converter={StaticResource ActionToVisibility}}" Grid.Column="6" Background="Black" Width="4"/>
+
+                            <StackPanel Visibility="{Binding Path=task3, Converter={StaticResource ActionToVisibility}}" Grid.Row="0" Grid.Column="7" Orientation="Horizontal">
+                                <TextBlock Margin="2" FontWeight="Bold" Text="{Binding task3, Converter={StaticResource ActionToString}}"></TextBlock>
+                                <TextBlock Margin="2">:</TextBlock>
+                                <TextBlock Margin="2" Text="{Binding Path_3_Move}">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Margin="2" Text="{Binding Path_3_Move}"></TextBlock>
+                                    </TextBlock.ToolTip>
+                                </TextBlock>
+                            </StackPanel>
+                            <GridSplitter Visibility="{Binding Path=task3, Converter={StaticResource ActionToVisibility}}" Grid.Column="7" Background="Black" Width="4"/>
+
+                            <StackPanel Visibility="{Binding Path=task2, Converter={StaticResource ActionToVisibility}}" Grid.Row="0" Grid.Column="8" Orientation="Horizontal">
+                                <TextBlock Margin="2" FontWeight="Bold" Text="{Binding task2, Converter={StaticResource ActionToString}}"></TextBlock>
+                                <TextBlock Margin="2">:</TextBlock>
+                                <TextBlock Margin="2" Text="{Binding Path_2_Copy}">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Margin="2" Text="{Binding Path_2_Copy}"></TextBlock>
+                                    </TextBlock.ToolTip>
+                                </TextBlock>
+                            </StackPanel>
+                            <GridSplitter Visibility="{Binding Path=task2, Converter={StaticResource ActionToVisibility}}" Grid.Column="8" Background="Black" Width="4"/>
+
+                            <StackPanel Visibility="Visible" Grid.Row="0" Grid.Column="9" Orientation="Horizontal">
+                                <TextBlock Margin="2" FontWeight="Bold" Text="{Binding task1, Converter={StaticResource ActionToString}}"></TextBlock>
+                                <TextBlock Margin="2">:</TextBlock>
+                                <TextBlock Margin="2" Text="{Binding Path_1_Original}">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Margin="2" Text="{Binding Path_1_Original}"></TextBlock>
+                                    </TextBlock.ToolTip>
+                                </TextBlock>
+                            </StackPanel>
+                            <GridSplitter Visibility="Visible" Grid.Column="9" Background="Black" Width="4"/>
+                            
+                            
+                            <StackPanel Visibility="{Binding Path=HashCode, Converter={StaticResource StringToVisibility}}" Grid.Row="0" Grid.Column="10" Orientation="Horizontal">
+                                <TextBlock Margin="2" FontWeight="Bold" Text="hashcode"></TextBlock>
+                                <TextBlock Margin="2">:</TextBlock>
+                                <TextBlock Margin="2" Text="{Binding HashCode}">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Margin="2" Text="{Binding HashCode}"></TextBlock>
+                                    </TextBlock.ToolTip>
+                                </TextBlock>
+                            </StackPanel>
+
+                            <GridSplitter Visibility="{Binding Path=HashCode, Converter={StaticResource StringToVisibility}}" Grid.Column="10" Background="Black" Width="4"/>
+
+
+
+
+                            <StackPanel Visibility="{Binding Path=DuplicatesSourceSourceOrTT, Converter={StaticResource StringListToVisibility}}" Grid.Row="0" Grid.Column="11" Orientation="Horizontal">
+                                <TextBlock Margin="2">Duplicate SS of:</TextBlock>
+
+                                <ComboBox ItemsSource="{Binding DuplicatesSourceSourceOrTT}">
+
+                                </ComboBox>
+                            </StackPanel>
+                            <GridSplitter Visibility="{Binding Path=DuplicatesSourceSourceOrTT, Converter={StaticResource StringListToVisibility}}" Grid.Column="11" Background="Black" Width="4"/>
+
+                            <StackPanel Visibility="{Binding Path=DuplicatesSourceTarget, Converter={StaticResource StringListToVisibility}}" Grid.Row="0" Grid.Column="12" Orientation="Horizontal">
+                                <TextBlock Margin="2">Duplicate ST of:</TextBlock>
+
+                                <ComboBox ItemsSource="{Binding DuplicatesSourceTarget}">
+
+                                </ComboBox>
+                            </StackPanel>
+
+
+
+                        </Grid>
+
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+
+        </Grid>
+    </ScrollViewer>
+</UserControl>

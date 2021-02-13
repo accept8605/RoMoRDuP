@@ -1,0 +1,47 @@
+﻿<src:UCOptimizeScriptEntryBase
+             x:Class="RoMoRDuP.UserControls.UCOptimizeScriptEntryFind"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:src="clr-namespace:RoMoRDuP.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400">
+    <Grid>
+        <Expander Header="Find Condition" Name="Expander_Condition">
+            <StackPanel>
+                <WrapPanel Margin="3" Orientation="Horizontal">
+                    <Label>Find term</Label>
+                    <TextBox Width="30"></TextBox>
+                    <Label>in filename</Label>
+                    <TextBox Width="30"></TextBox>
+                    <Label>times</Label>
+                </WrapPanel>
+                <GroupBox Margin="5" Header="Limit to area">
+                    <StackPanel>
+                        <StackPanel Margin="3" Orientation="Horizontal">
+                            <CheckBox></CheckBox>
+                            <Label>in chars</Label>
+                            <TextBox Width="30"></TextBox>
+                            <Label>to</Label>
+                            <TextBox Width="30"></TextBox>
+                        </StackPanel>
+                        <GroupBox Margin="5" Header="Orientation">
+                            <WrapPanel Orientation="Horizontal">
+                                <RadioButton Margin="3">from beginning</RadioButton>
+                                <RadioButton Margin="3">from end</RadioButton>
+                            </WrapPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </GroupBox>
+                <WrapPanel Margin="3" Orientation="Horizontal">
+                    <Slider Width="80" Maximum="100" Name="Slider_Similarity"></Slider>
+                    <TextBox Text="{Binding ElementName=Slider_Similarity, Path=Value}"></TextBox>
+                    <Label>%</Label>
+                    <Label>similarity</Label>
+                </WrapPanel>
+                <CheckBox Margin="3">exclude extension</CheckBox>
+            </StackPanel>
+        </Expander>
+    </Grid>
+</src:UCOptimizeScriptEntryBase>

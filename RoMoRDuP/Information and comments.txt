@@ -1,0 +1,12 @@
+﻿If Properties-Settings.settings was changed, following has to be edited in the Settings.Designer.cs
+
+[System.Configuration.SettingsProvider(typeof(RoMoRDuP.CustomSettingsProvider))]
+
+
+
+Änderungen für Window Base class:
+
+statt <Window ... :
+<src:WFeatures_BaseClass 
+		....
+        xmlns:src="clr-namespace:RoMoRDuP"

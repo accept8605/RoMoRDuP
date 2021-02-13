@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="RoMoRDuP.UserControls.UCPlaylistUpdates"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400"
+             x:Name="PlaylistUpdates">
+
+    <UserControl.Resources>
+        <Style x:Key="itemstyle" TargetType="{x:Type ListViewItem}">
+            <EventSetter Event="MouseDoubleClick" Handler="MouseDoubleClick_PlaylistUpdates" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <ScrollViewer>
+            <StackPanel>
+                <RichTextBox Margin="5">
+                    <FlowDocument>
+                        <Paragraph>
+                            Here you see all the playlist-files that are going to be updated (if any).
+                        </Paragraph>
+                        <Paragraph>
+                            Note that you can double-click on any of the playlist-updates to show the changes in WinMerge (if installed).
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+                
+                
+                <ListView Margin="3" DataContext="{Binding ElementName=PlaylistUpdates, Path=playlistUpdates.playlistUpdatesModel}" ItemsSource="{Binding Items}" ItemContainerStyle="{StaticResource itemstyle}">
+                    <ListView.View>
+                        <GridView>
+
+                            <GridViewColumn Header="UpdatePlaylist">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding UpdatePlaylist}"></CheckBox>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="LeaveCopyOfOldVersion">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding LeaveCopy}"></CheckBox>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="PlaylistPathOriginal">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding PathOriginal}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="PlaylistPathOriginalRename">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding PathRenameOrg}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+
+                </ListView>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox Margin="3" IsChecked="{Binding ElementName=PlaylistUpdates, Path=playlistUpdates.playlistUpdatesModel.bPlaylistUpdates}">UpdatePlaylist - Select/Deselect all</CheckBox>
+                    <CheckBox Margin="3" IsChecked="{Binding ElementName=PlaylistUpdates, Path=playlistUpdates.playlistUpdatesModel.bLeaveCopy}">LeaveCopy - Select/Deselect all</CheckBox>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,173 @@
+﻿<UserControl x:Class="RoMoRDuP.UserControls.UCMirrorUserOptions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+             xmlns:ValueConverters="clr-namespace:RoMoRDuP.ValueConverters"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400"
+             x:Name="MirrorUserOptions"
+             >
+
+    <UserControl.Resources>
+        <ValueConverters:RadioBoolToEnumConverter x:Key="radioBoolToEnumConverter" />
+        <!--<ValueConverters:InvertBoolConverter x:Key="invertBoolConverter" />-->
+        
+    </UserControl.Resources>
+    
+    <Grid>
+        <StackPanel>
+
+            <GroupBox Header="Sync - Directions(Source prefered) + Copying missing files">
+                <StackPanel>
+                    <CheckBox Margin="2" IsEnabled="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorCopySourceTargetIsEnabled}" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorCopySourceTarget}">Copy missing file from source to target</CheckBox>
+                    <CheckBox Margin="2" IsEnabled="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorCopyTargetSourceIsEnabled}" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorCopyTargetSource}">Copy missing file from target to source</CheckBox>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox>
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>File attributes</Label>
+                        <Rectangle Grid.Column="1" Margin="5,0,0,0" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="../Resources/Icon_Info.png"/>
+                            </Rectangle.Fill>
+                            <Rectangle.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <Label>Use this to synchronize file attributes (ReadOnly, Hidden, CreationDate).</Label>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Rectangle.ToolTip>
+                        </Rectangle>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel>
+                    <CheckBox Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorSyncAttributes}">Synchronize file attributes</CheckBox>
+                </StackPanel>
+            </GroupBox>
+
+
+            <GroupBox>
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Deleting files</Label>
+                        <Rectangle Grid.Column="1" Margin="5,0,0,0" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="../Resources/Icon_Warning.png"/>
+                            </Rectangle.Fill>
+                            <Rectangle.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <Label>Be careful with those options and always review the task-tree closely.</Label>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Rectangle.ToolTip>
+                        </Rectangle>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel>
+                    <CheckBox Margin="2" IsEnabled="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorDeleteSourceTargetIsEnabled}" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorDeleteSourceTarget}">Delete files that are in target but not in source(=>Deleting in target)</CheckBox>
+                    <CheckBox Margin="2" IsEnabled="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorDeleteTargetSourceIsEnabled}" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorDeleteTargetSource}">Delete files that are in source but not in target(=>Deleting in source)</CheckBox>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox>
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Duplicates with different filenames</Label>
+                        <Rectangle Grid.Column="1" Margin="5,0,0,0" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="../Resources/Icon_Info.png"/>
+                            </Rectangle.Fill>
+                            <Rectangle.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <Label FontWeight="Bold">Only applies if the duplicate is in the same folder between source/target.</Label>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Rectangle.ToolTip>
+                        </Rectangle>
+                    </StackPanel>
+                </GroupBox.Header>
+                <WrapPanel Orientation="Horizontal">
+                    <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorDuplicates, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=Skip}">Skip duplicates</RadioButton>
+                    <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorDuplicates, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=RenameSyncDir}">Rename duplicates SyncDir</RadioButton>
+                    <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorDuplicates, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=Copy}">Copy duplicates anyway</RadioButton>
+                </WrapPanel>
+            </GroupBox>
+
+            <GroupBox>
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Updated Files</Label>
+                        <Rectangle Grid.Column="1" Margin="5,0,0,0" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="../Resources/Icon_Info.png"/>
+                            </Rectangle.Fill>
+                            <Rectangle.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <Label>Updated files = Files between source and target with different</Label>
+                                        <Label>hash codes but with the same path and file name</Label>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Rectangle.ToolTip>
+                        </Rectangle>
+                    </StackPanel>
+                </GroupBox.Header>
+                <WrapPanel Orientation="Horizontal">
+                    <RadioButton Margin="2"  IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorUpdated, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=Skip}">Skip updated files</RadioButton>
+                    <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorUpdated, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=MostRecentDate}">Only use file with the most recent date in SyncDir</RadioButton>
+                    <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorUpdated, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=SyncDir}">Use SyncDirection</RadioButton>
+                   <!-- <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorUpdated, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=Target}">Use target file</RadioButton> -->
+                   <!-- <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorUpdated, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=CopyAddNumber}">Rename and copy file: Add number</RadioButton> -->
+                   <!-- <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorUpdated, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=CopyAddDate}">Use most recent and rename original: Add file date</RadioButton> -->
+                </WrapPanel>
+            </GroupBox>
+
+            <GroupBox>
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Moved Files</Label>
+                        <Rectangle Grid.Column="1" Margin="5,0,0,0" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="../Resources/Icon_Info.png"/>
+                            </Rectangle.Fill>
+                            <Rectangle.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <Label>A moved file is a single file with the same hash code but in a different folder between source/target.</Label>
+                                        <Label FontWeight="Bold">Only applies if there is only one example of the file.</Label>
+                                        <Label>Otherwise use remove duplicates first</Label>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Rectangle.ToolTip>
+                        </Rectangle>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel>
+                    <GroupBox Header="Move to" Margin="3">
+                        <WrapPanel Orientation="Horizontal">
+                            <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorMoveTo, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=MoveSyncDir}">Move back in SyncDirection</RadioButton>
+                           <!-- <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorMoveTo, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=MoveTarget}">Move back to the same place as in target folder</RadioButton> -->
+                            <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorMoveTo, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=DontMove}">Don´t move</RadioButton>
+                        </WrapPanel>
+                    </GroupBox>
+                    <GroupBox Header="Change filename of moved files" Margin="3">
+                        <WrapPanel Orientation="Horizontal">
+                            <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorMovedRenaming, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=SyncDir}">Change filename in SyncDirection</RadioButton>
+                          <!-- <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorMovedRenaming, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=Target}">Change filename to target</RadioButton> -->
+                            <RadioButton Margin="2" IsChecked="{Binding ElementName=MirrorUserOptions, Path=userOptionsMirror.OptionsMirrorMovedRenaming, Converter={StaticResource radioBoolToEnumConverter}, ConverterParameter=DontChange}">Don´t change filename</RadioButton>
+                        </WrapPanel>
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+
+        </StackPanel>
+    </Grid>
+</UserControl>
+

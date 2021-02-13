@@ -1,0 +1,38 @@
+﻿<Window x:Class="RoMoRDuP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:ValueConverters="clr-namespace:RoMoRDuP.ValueConverters"
+        Title="RoMoRDuP - Rename or Mirror or Remove Duplicates and update Playlists" Height="700" Width="800" MinHeight="430" MinWidth="450"
+        x:Name="mainWindow"
+        >
+    
+<Window.CommandBindings>
+    <CommandBinding Command="Open" CanExecute="OpenCanExecute" Executed="OpenExecuted"/>
+    <CommandBinding Command="Close" CanExecute="CloseCanExecute" Executed="CloseExecuted"/>
+    <CommandBinding Command="Save" CanExecute="SaveCanExecute" Executed="SaveExecuted"/>
+</Window.CommandBindings>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Load profile" Command="Open" IsEnabled="{Binding ElementName=mainWindow, Path=bLoadProfileEnabled}"></MenuItem>
+                <MenuItem Header="_Save profile" Command="Save"></MenuItem>
+                <MenuItem Header="_Exit" Command="Close"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="Follow me on Twitter for updates" Click="Click_Menu_Twitter"></MenuItem>
+                <MenuItem Header="Show developer Blog" Click="Click_Menu_Blog"></MenuItem>
+                <MenuItem Header="Open user manual" Click="Click_Menu_UserManual"></MenuItem>
+                <MenuItem Header="Request feature" Click="Click_Menu_RequestFeature"></MenuItem>
+                <MenuItem Header="_About" Name="Menu_About" Click="MenuAbout_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <Grid DockPanel.Dock="Bottom" Name="ParentPanel">
+            
+        </Grid>
+
+    </DockPanel>
+
+</Window>

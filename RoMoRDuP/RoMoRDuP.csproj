@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{21805D2D-9AD9-451B-93D0-F7E2B9382947}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RoMoRDuP</RootNamespace>
+    <AssemblyName>RoMoRDuP</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ICON_RDP.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AboutBox.xaml.cs">
+      <DependentUpon>AboutBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomSettingsProvider.cs" />
+    <Compile Include="NetworkPathing.cs" />
+    <Compile Include="ObservableCollectionCustom.cs" />
+    <Compile Include="PlaylistUpdates.cs" />
+    <Compile Include="Profiles.cs" />
+    <Compile Include="Ressourcen.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ressourcen.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Task.cs" />
+    <Compile Include="TaskExecuteClient.cs" />
+    <Compile Include="TaskPlanner.cs" />
+    <Compile Include="TaskPlannerBase.cs" />
+    <Compile Include="TaskPlannerMirror.cs" />
+    <Compile Include="TaskPlannerOptimize.cs" />
+    <Compile Include="TaskPlannerRemoveDuplicates.cs" />
+    <Compile Include="Tasks.cs" />
+    <Compile Include="TasksExecute.cs" />
+    <Compile Include="UCMain.xaml.cs">
+      <DependentUpon>UCMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UCMirrorFolders.xaml.cs">
+      <DependentUpon>UCMirrorFolders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UCScriptEntrys_BaseClass.cs" />
+    <Compile Include="UsefulMethods.cs" />
+    <Compile Include="UserControls\UCDataCollecting.xaml.cs">
+      <DependentUpon>UCDataCollecting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCGenerateHashes.xaml.cs">
+      <DependentUpon>UCGenerateHashes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCMirrorUserOptions.xaml.cs">
+      <DependentUpon>UCMirrorUserOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCMirrorUserOptionsEasy.xaml.cs">
+      <DependentUpon>UCMirrorUserOptionsEasy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCOptimizeGroupOptions.xaml.cs">
+      <DependentUpon>UCOptimizeGroupOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCOptimizeRenameOptions.xaml.cs">
+      <DependentUpon>UCOptimizeRenameOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCOptimizeScriptEntry.xaml.cs">
+      <DependentUpon>UCOptimizeScriptEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCOptimizeScriptEntryFind.xaml.cs">
+      <DependentUpon>UCOptimizeScriptEntryFind.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCOptimizeScriptEntryFindNumber.xaml.cs">
+      <DependentUpon>UCOptimizeScriptEntryFindNumber.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCOptimizeScriptEntryIF.xaml.cs">
+      <DependentUpon>UCOptimizeScriptEntryIF.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCOptimizeScriptEntrySameChars.xaml.cs">
+      <DependentUpon>UCOptimizeScriptEntrySameChars.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCOptimizeSelectGrouping.xaml.cs">
+      <DependentUpon>UCOptimizeSelectGrouping.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCParent.xaml.cs">
+      <DependentUpon>UCParent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCPlaylistUpdates.xaml.cs">
+      <DependentUpon>UCPlaylistUpdates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCRemoveDuplicatesUserOptions.xaml.cs">
+      <DependentUpon>UCRemoveDuplicatesUserOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCSelectSource.xaml.cs">
+      <DependentUpon>UCSelectSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTaskExecute.xaml.cs">
+      <DependentUpon>UCTaskExecute.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTaskViewChildAfter.xaml.cs">
+      <DependentUpon>UCTaskViewChildAfter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTaskViewChildBefore.xaml.cs">
+      <DependentUpon>UCTaskViewChildBefore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTaskViewChildPlaylist.xaml.cs">
+      <DependentUpon>UCTaskViewChildPlaylist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTaskViewMirrorParent.xaml.cs">
+      <DependentUpon>UCTaskViewMirrorParent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTaskViewParent.xaml.cs">
+      <DependentUpon>UCTaskViewParent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserOptions.cs" />
+    <Compile Include="UserOptionsOptimize.cs" />
+    <Compile Include="ValueConverters.cs" />
+    <Compile Include="UCFeatures_BaseClass.cs" />
+    <Compile Include="WFileFilter.xaml.cs">
+      <DependentUpon>WFileFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WHourglass.xaml.cs">
+      <DependentUpon>WHourglass.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WLicense.xaml.cs">
+      <DependentUpon>WLicense.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WMBExecuteTasks.xaml.cs">
+      <DependentUpon>WMBExecuteTasks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UCOptimize.xaml.cs">
+      <DependentUpon>UCOptimize.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UCRemoveDuplicates.xaml.cs">
+      <DependentUpon>UCRemoveDuplicates.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AboutBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="UCMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UCMirrorFolders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCDataCollecting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCGenerateHashes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCMirrorUserOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCMirrorUserOptionsEasy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCOptimizeGroupOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCOptimizeRenameOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCOptimizeScriptEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCOptimizeScriptEntryFind.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCOptimizeScriptEntryFindNumber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCOptimizeScriptEntryIF.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCOptimizeScriptEntrySameChars.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCOptimizeSelectGrouping.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCParent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\UCPlaylistUpdates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCRemoveDuplicatesUserOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCSelectSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\UCTaskExecute.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCTaskViewChildAfter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCTaskViewChildBefore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCTaskViewChildPlaylist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCTaskViewMirrorParent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCTaskViewParent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WFileFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WHourglass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WLicense.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WMBExecuteTasks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UCOptimize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UCRemoveDuplicates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ressourcen.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Ressourcen.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_Warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_Folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_File.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Information and comments.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_Feature_Duplicates.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_Feature_Mirror.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_Feature_Optimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_Feature_Repair.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_Load.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Mirror_Easy_One.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Mirror_Easy_Both.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Mirror_Easy_Remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Banner_Unicef.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon_Exe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ICON_RDP.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Hourglass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon_UAC.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

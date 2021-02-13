@@ -1,0 +1,39 @@
+﻿<src:UCOptimizeScriptEntryBase
+             x:Class="RoMoRDuP.UserControls.UCOptimizeScriptEntryIF"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:src="clr-namespace:RoMoRDuP.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400">
+    <Grid>
+        <Expander Header="IF Condition" Name="Expander_Condition">
+            <StackPanel>
+                <WrapPanel Orientation="Horizontal">
+                    <Label>IF chars from</Label>
+                    <TextBox Width="30"></TextBox>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal">
+                    <Label>to</Label>
+                    <TextBox Width="30"></TextBox>
+                    <Label>counted from</Label>
+                </WrapPanel>
+
+                <GroupBox Margin="5" Header="Orientation">
+                        <WrapPanel Orientation="Horizontal">
+                            <RadioButton Margin="3">from beginning</RadioButton>
+                            <RadioButton Margin="3">from end</RadioButton>
+                        </WrapPanel>
+                </GroupBox>
+                
+                <WrapPanel Orientation="Horizontal">
+                    <Label>contain term</Label>
+                    <TextBox Width="30"></TextBox>
+                </WrapPanel>
+
+                <CheckBox Margin="3">negate</CheckBox>
+            </StackPanel>
+        </Expander>
+    </Grid>
+</src:UCOptimizeScriptEntryBase>

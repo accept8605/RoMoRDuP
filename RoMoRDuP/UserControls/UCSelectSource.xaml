@@ -1,0 +1,239 @@
+﻿<UserControl x:Class="RoMoRDuP.UserControls.UCSelectSource"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400"
+             x:Name="SelectSource"
+             >
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel>
+            <GroupBox Header="Select source folder path">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding ElementName=SelectSource, Path=userOptionsBase.strSelectSourcePath}"></TextBox>
+                    <Button Width="30" Margin="5,0,5,0" Click="Click_Button_SelectSource">...</Button>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Select target folder path" Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bSelectTarget_Visible, Converter={StaticResource BoolToVis}}">
+                    <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding ElementName=SelectSource, Path=userOptionsBase.strSelectTargetPath}"></TextBox>
+                        <Button Width="30" Margin="5,0,5,0" Click="Click_Button_SelectTarget">...</Button>
+                    </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="File filters" Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bExpertOptions_Visible, Converter={StaticResource BoolToVis}}">
+                <WrapPanel Orientation="Horizontal">
+                    <Button Click="Click_Button_FileFilters" Width="30" Margin="5,0,5,0">...</Button>
+                    <Rectangle Grid.Column="1" Margin="5,0,0,5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="../Resources/Icon_Info.png"/>
+                        </Rectangle.Fill>
+                        <Rectangle.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <Label>Set a file filter for files that are going to be skipped.</Label>
+                                    <Label FontWeight="Bold">The hash code generation is always done for all the files!</Label>
+                                    <Label>This filter defines which files actions will be created for.</Label>
+                                </StackPanel>
+                            </ToolTip>
+                        </Rectangle.ToolTip>
+                    </Rectangle>
+                        <Label FontWeight="Bold">Include:</Label>
+                        <Label Content="{Binding ElementName=SelectSource, Path=userOptionsBase.fileFilterOptions.IncludeOnly}"></Label>
+                        <Label FontWeight="Bold">Exclude:</Label>
+                        <Label Content="{Binding ElementName=SelectSource, Path=userOptionsBase.fileFilterOptions.AlwaysExclude}"></Label>
+                </WrapPanel>
+            </GroupBox>
+
+            <GroupBox Header="Process max. for hash code generation per file" Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bSelectSourceVisibleResult, Converter={StaticResource BoolToVis}}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Width="95" Text="{Binding ElementName=SelectSource, Path=userOptionsBase.ProcessHash}"></TextBox>
+                    <ComboBox IsEditable="False" ItemsSource="{Binding ElementName=SelectSource, Path=userOptionsBase.SelectedSizeProcessHashItems}" SelectedItem="{Binding ElementName=SelectSource, Path=userOptionsBase.SelectedSizeProcessHash}">
+                    </ComboBox>
+                    <Rectangle Grid.Column="1" Margin="5,0,0,5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="../Resources/Icon_Info.png"/>
+                        </Rectangle.Fill>
+                        <Rectangle.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <Label>Processing less max. data amount of a file for hash code generation</Label>
+                                    <Label>makes the hash code generation process faster.</Label>
+                                </StackPanel>
+                            </ToolTip>
+                        </Rectangle.ToolTip>
+                    </Rectangle>
+                    <Rectangle Grid.Column="1" Margin="5,0,0,5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="../Resources/Icon_Warning.png"/>
+                        </Rectangle.Fill>
+                        <Rectangle.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <Label FontWeight="Bold">Processing not enough max. data amount of a file can result</Label>
+                                    <Label FontWeight="Bold">in identifying different files as duplicates.</Label>
+                                </StackPanel>
+                            </ToolTip>
+                        </Rectangle.ToolTip>
+                    </Rectangle>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox>
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Playlist updates</Label>
+                        <Rectangle Grid.Column="1" Margin="5,0,0,0" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="../Resources/Icon_Info.png"/>
+                            </Rectangle.Fill>
+                            <Rectangle.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <Label>If files are moved or renamed, your playlists might stop working.</Label>
+                                        <Label>With this, you can update the paths in your playlists.</Label>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Rectangle.ToolTip>
+                        </Rectangle>
+                    </StackPanel>
+                </GroupBox.Header>
+                
+                <StackPanel>
+                    <CheckBox Margin="5,0,0,0" IsChecked="{Binding ElementName=SelectSource, Path=userOptionsBase.bUpdatePlaylists}">Update playlists</CheckBox>
+                    <CheckBox Margin="5,0,0,0" Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bExpertOptions_Visible, Converter={StaticResource BoolToVis}}" IsChecked="{Binding ElementName=SelectSource, Path=userOptionsBase.bUseSameFolderPaths}">Use same folder paths</CheckBox>
+                    <Button Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.Button_AddPlaylistPath_VisibilityResult, Converter={StaticResource BoolToVis}}" Name="Button_AddPlaylistPath"  Margin="10,0,5,0" HorizontalAlignment="Left" Click="Click_Playlist_Button_AddPlaylistPath">Add playlist folder path</Button>
+                    <StackPanel Margin="20,5,0,5" Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bExpertOptions_Visible, Converter={StaticResource BoolToVis}}">
+                        <StackPanel Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bPlaylistPath1_Visible, Converter={StaticResource BoolToVis}}"  Orientation="Horizontal">
+                            <TextBox Text="{Binding ElementName=SelectSource, Path=userOptionsBase.strPlaylistPath1}"></TextBox>
+                            <Button Click="Click_Button_AddPlaylistPath1" Width="30" Margin="5,0,5,0">...</Button>
+                            <Button Click="Click_Button_RemovePlaylistPath1">
+                                <Button.Content>
+                                    <Rectangle Width="19" Height="19">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="../Resources/Icon_Delete.png"/>
+                                        </Rectangle.Fill>
+                                        <Rectangle.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <Label FontWeight="Bold">Remove Path</Label>
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </Rectangle.ToolTip>
+                                    </Rectangle>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bPlaylistPath2_Visible, Converter={StaticResource BoolToVis}}" Orientation="Horizontal">
+                            <TextBox Text="{Binding ElementName=SelectSource, Path=userOptionsBase.strPlaylistPath2}"></TextBox>
+                            <Button Click="Click_Button_AddPlaylistPath2" Width="30" Margin="5,0,5,0">...</Button>
+                            <Button Click="Click_Button_RemovePlaylistPath2">
+                                <Button.Content>
+                                    <Rectangle Width="19" Height="19">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="../Resources/Icon_Delete.png"/>
+                                        </Rectangle.Fill>
+                                        <Rectangle.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <Label FontWeight="Bold">Remove Path</Label>
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </Rectangle.ToolTip>
+                                    </Rectangle>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bPlaylistPath3_Visible, Converter={StaticResource BoolToVis}}" Orientation="Horizontal">
+                            <TextBox Text="{Binding ElementName=SelectSource, Path=userOptionsBase.strPlaylistPath3}"></TextBox>
+                            <Button Click="Click_Button_AddPlaylistPath3" Width="30" Margin="5,0,5,0">...</Button>
+                            <Button Click="Click_Button_RemovePlaylistPath3">
+                                <Button.Content>
+                                    <Rectangle Width="19" Height="19">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="../Resources/Icon_Delete.png"/>
+                                        </Rectangle.Fill>
+                                        <Rectangle.ToolTip>
+                                            <StackPanel>
+                                                <Label FontWeight="Bold">Remove Path</Label>
+                                            </StackPanel>
+                                        </Rectangle.ToolTip>
+                                    </Rectangle>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bPlaylistPath4_Visible, Converter={StaticResource BoolToVis}}" Orientation="Horizontal">
+                            <TextBox Text="{Binding ElementName=SelectSource, Path=userOptionsBase.strPlaylistPath4}"></TextBox>
+                            <Button Click="Click_Button_AddPlaylistPath4" Width="30" Margin="5,0,5,0">...</Button>
+                            <Button Click="Click_Button_RemovePlaylistPath4">
+                                <Button.Content>
+                                    <Rectangle Width="19" Height="19">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="../Resources/Icon_Delete.png"/>
+                                        </Rectangle.Fill>
+                                        <Rectangle.ToolTip>
+                                            <StackPanel>
+                                                <Label FontWeight="Bold">Remove Path</Label>
+                                            </StackPanel>
+                                        </Rectangle.ToolTip>
+                                    </Rectangle>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bPlaylistPath5_Visible, Converter={StaticResource BoolToVis}}" Orientation="Horizontal">
+                            <TextBox Text="{Binding ElementName=SelectSource, Path=userOptionsBase.strPlaylistPath5}"></TextBox>
+                            <Button Click="Click_Button_AddPlaylistPath5" Width="30" Margin="5,0,5,0">...</Button>
+                            <Button Click="Click_Button_RemovePlaylistPath5">
+                                <Button.Content>
+                                    <Rectangle Width="19" Height="19">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="../Resources/Icon_Delete.png"/>
+                                        </Rectangle.Fill>
+                                        <Rectangle.ToolTip>
+                                            <StackPanel>
+                                                <Label FontWeight="Bold">Remove Path</Label>
+                                            </StackPanel>
+                                        </Rectangle.ToolTip>
+                                    </Rectangle>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+
+
+                    <GroupBox Header="Playlist file filters" Margin="5,5,5,5" Visibility="{Binding ElementName=SelectSource, Path=userOptionsBase.bExpertOptions_Visible, Converter={StaticResource BoolToVis}}">
+                        <WrapPanel Orientation="Horizontal">
+                            <Button Click="Click_Button_PlaylistFileFilters" Width="30" Margin="5,0,5,0">...</Button>
+                            <Rectangle Grid.Column="1" Margin="5,0,0,5" Width="19" Height="19" MouseUp="MouseUp" MouseLeave="MouseLeave">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="../Resources/Icon_Info.png"/>
+                                </Rectangle.Fill>
+                                <Rectangle.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <Label>Set a filter for files whose content will be checked for path updates.</Label>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Rectangle.ToolTip>
+                            </Rectangle>
+                            <Label FontWeight="Bold">Include:</Label>
+                            <Label Content="{Binding ElementName=SelectSource, Path=userOptionsBase.PlaylistFileFilterOptions.IncludeOnly}"></Label>
+                            <Label FontWeight="Bold">Exclude:</Label>
+                            <Label Content="{Binding ElementName=SelectSource, Path=userOptionsBase.PlaylistFileFilterOptions.AlwaysExclude}"></Label>
+                        </WrapPanel>
+                    </GroupBox>
+
+
+                    <CheckBox Margin="5,0,0,0" IsChecked="False" IsEnabled="False">Check shortcuts, too</CheckBox>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

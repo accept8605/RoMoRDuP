@@ -1,0 +1,32 @@
+﻿<src:UCOptimizeScriptEntryBase
+             x:Class="RoMoRDuP.UserControls.UCOptimizeScriptEntrySameChars"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:src="clr-namespace:RoMoRDuP.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400">
+    <Grid>
+        <Expander Header="Find same char in a row" Name="Expander_Condition">
+            <StackPanel>
+                <WrapPanel Margin="3" Orientation="Horizontal">
+                    <Label>Find char</Label>
+                    <TextBox Width="30"></TextBox>
+                    <Label>in filename</Label>
+                </WrapPanel>
+                <WrapPanel Margin="3" Orientation="Horizontal">
+                    <Label>min</Label>
+                    <TextBox Width="30"></TextBox>
+                    <Label>times</Label>
+                </WrapPanel>
+                <WrapPanel Margin="3" Orientation="Horizontal">
+                    <Label>max</Label>
+                    <TextBox Width="30"></TextBox>
+                    <Label>times</Label>
+                </WrapPanel>
+
+            </StackPanel>
+        </Expander>
+    </Grid>
+</src:UCOptimizeScriptEntryBase>

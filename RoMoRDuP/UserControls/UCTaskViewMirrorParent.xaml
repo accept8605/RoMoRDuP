@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="RoMoRDuP.UserControls.UCTaskViewMirrorParent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="450">
+    <Grid>
+        <TabControl Name="tabControl" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Header="SourceFolder">
+                <Grid Name="TaskViewSourcePanel" MinWidth="530" MinHeight="360"></Grid>
+            </TabItem>
+            <TabItem Header="TargetFolder">
+                <Grid Name="TaskViewTargetPanel" MinWidth="530" MinHeight="360"></Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
